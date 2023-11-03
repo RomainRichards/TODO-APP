@@ -89,7 +89,7 @@ function addTask(event) {
 }
 
 // Change Complete State
-function completeTask(id) {
+/*function completeTask(id) {
   // Get Task
   const taskIndex = list.findIndex(t => t.id == id)
   const task = list[taskIndex]
@@ -101,7 +101,28 @@ function completeTask(id) {
   // Save Changes
   localStorage.setItem("tasks", JSON.stringify(list))
   showTasksList()
+}*/
+
+function completeTask(id) {
+  // Get the task index
+  const taskIndex = list.findIndex(t => t.id === id);
+
+  if (taskIndex !== -1) {
+    // Clone the task to avoid modifying the original object
+    const updatedTask = { ...list[taskIndex] };
+
+    // Change the completed state
+    updatedTask.completed = !updatedTask.completed;
+
+    // Update the task in the list
+    list[taskIndex] = updatedTask;
+
+    // Save Changes
+    localStorage.setItem("tasks", JSON.stringify(list));
+    showTasksList();
+  }
 }
+
 
 /**
  * Remove task
